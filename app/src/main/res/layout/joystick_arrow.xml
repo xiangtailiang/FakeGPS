@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="@dimen/joystick_width"
-              android:layout_height="@dimen/joystick_height"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
-    <com.tencent.fakegps.JoyStickButton
+    <com.tencent.fakegps.ui.JoyStickButton
         android:id="@+id/btn_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.tencent.fakegps.JoyStickButton
+        <com.tencent.fakegps.ui.JoyStickButton
             android:id="@+id/btn_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
 
 
-        <com.tencent.fakegps.JoyStickButton
+        <com.tencent.fakegps.ui.JoyStickButton
             android:id="@+id/btn_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
     </LinearLayout>
 
 
-    <com.tencent.fakegps.JoyStickButton
+    <com.tencent.fakegps.ui.JoyStickButton
         android:id="@+id/btn_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/joystick_width"
+              android:layout_height="@dimen/joystick_height"
+              android:orientation="vertical">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="15dp"
+                  android:gravity="center_horizontal"
+                  android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_set_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_set_loc"/>
+
+        <ImageButton
+            android:id="@+id/btn_fly_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_flight_takeoff"/>
+
+        <ImageButton
+            android:id="@+id/btn_copy_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_copy_loc"/>
+
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/joystick_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

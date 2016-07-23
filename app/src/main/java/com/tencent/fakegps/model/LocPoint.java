@@ -1,11 +1,20 @@
-package com.tencent.fakegps;
+package com.tencent.fakegps.model;
+
+import java.io.Serializable;
 
 /**
  * Created by tiger on 7/23/16.
  */
-public class LocPoint {
+public class LocPoint implements Serializable {
+    static final long serialVersionUID =-1770575152720897533L;
+
     private double mLatitude = 37.802406;
     private double mLongitude = -122.401779;
+
+    public LocPoint(LocPoint locPoint) {
+        mLatitude = locPoint.getLatitude();
+        mLongitude = locPoint.getLongitude();
+    }
 
     public LocPoint(double latitude, double longitude) {
         mLatitude = latitude;

@@ -6,10 +6,11 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
+
+import com.tencent.fakegps.model.LocPoint;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,32 +23,20 @@ public class LocationThread extends HandlerThread {
 
     private static final String TAG = "LocationThread";
 
-    //    private final double LAT_DEFAULT = 37.802406;
-//    private final double LON_DEFAULT = -122.401779;
-    private final double LAT_DEFAULT = 23.151637;
-    private final double LON_DEFAULT = 113.344721;
-
-//    23.151637, 113.344721
-
-    public static final int MSG_UP = 1;
-    public static final int MSG_DOWN = 2;
-    public static final int MSG_LEFT = 3;
-    public static final int MSG_RIGHT = 4;
 
     private Context mContext;
+    private JoyStickManager mJoyStickManager;
     private LocationManager mLocationManager;
 
     private Handler mHandler;
-
-    private LocPoint mLocPoint = new LocPoint(LAT_DEFAULT, LON_DEFAULT);
     private LocPoint mLastLocPoint = new LocPoint(0, 0);
-    private double mStep = 0.00001;
 
     private Method mMethodMakeComplete;
 
-    public LocationThread(Context context) {
+    public LocationThread(Context context, JoyStickManager joyStickManager) {
         super("LocationThread");
         mContext = context;
+        mJoyStickManager = joyStickManager;
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         try {
             mMethodMakeComplete = Location.class.getMethod("makeComplete", new Class[0]);
@@ -57,39 +46,11 @@ public class LocationThread extends HandlerThread {
 
     }
 
-    public void setLocPoint(LocPoint locPoint) {
-        mLocPoint = locPoint;
-    }
-
-    public void setStep(double step) {
-        mStep = step;
-    }
-
     @Override
     public synchronized void start() {
         super.start();
 
-        mHandler = new Handler(getLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case MSG_UP:
-                        mLocPoint.setLatitude(mLocPoint.getLatitude() + mStep);
-                        break;
-                    case MSG_DOWN:
-                        mLocPoint.setLatitude(mLocPoint.getLatitude() - mStep);
-                        break;
-                    case MSG_LEFT:
-                        mLocPoint.setLongitude(mLocPoint.getLongitude() - mStep);
-                        break;
-                    case MSG_RIGHT:
-                        mLocPoint.setLongitude(mLocPoint.getLongitude() + mStep);
-
-                        break;
-                }
-            }
-        };
+        mHandler = new Handler(getLooper());
         mHandler.post(mUpdateLocation);
     }
 
@@ -98,6 +59,7 @@ public class LocationThread extends HandlerThread {
     }
 
     public void stopThread() {
+        mHandler.removeCallbacksAndMessages(null);
         try {
             quit();
             interrupt();
@@ -118,6 +80,8 @@ public class LocationThread extends HandlerThread {
         } catch (Exception e) {
             Log.e(TAG, "stopThread fail!", e);
         }
+
+        mJoyStickManager = null;
     }
 
 
@@ -132,21 +96,23 @@ public class LocationThread extends HandlerThread {
     Runnable mUpdateLocation = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "UpdateLocation, " + mLocPoint);
+
+            LocPoint locPoint = mJoyStickManager.getCurrentLocPoint();
+            Log.d(TAG, "UpdateLocation, " + locPoint);
             setMockLocation(1, mContext);
             Location location = new Location("gps");
             try {
-                location.setLatitude(mLocPoint.getLatitude());
-                location.setLongitude(mLocPoint.getLongitude());
+                location.setLatitude(locPoint.getLatitude());
+                location.setLongitude(locPoint.getLongitude());
                 location.setAltitude(50);
                 if (Build.VERSION.SDK_INT > 16) {
                     location.setElapsedRealtimeNanos(SystemClock.elapsedRealtimeNanos());
                 }
                 location.setAccuracy(10);
-                if (mLastLocPoint.getLatitude() != mLocPoint.getLatitude()
-                        || mLocPoint.getLongitude() != mLocPoint.getLongitude()) {
-                    mLastLocPoint.setLatitude(mLocPoint.getLatitude());
-                    mLastLocPoint.setLongitude(mLocPoint.getLongitude());
+                if (mLastLocPoint.getLatitude() != locPoint.getLatitude()
+                        || mLastLocPoint.getLongitude() != locPoint.getLongitude()) {
+                    mLastLocPoint.setLatitude(locPoint.getLatitude());
+                    mLastLocPoint.setLongitude(locPoint.getLongitude());
                     location.setSpeed(1);
                 } else {
                     location.setSpeed(0);
@@ -178,5 +144,6 @@ public class LocationThread extends HandlerThread {
     public Handler getHandler() {
         return mHandler;
     }
+
 }
        

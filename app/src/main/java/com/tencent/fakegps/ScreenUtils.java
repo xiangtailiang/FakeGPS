@@ -10,12 +10,6 @@ import java.lang.reflect.Field;
  */
 public class ScreenUtils {
 
-
-    /**
-     * 获取状态栏的高度
-     *
-     * @return
-     */
     public static int getStatusBarHeight(Context context) {
 
         try {
@@ -31,11 +25,7 @@ public class ScreenUtils {
         return 0;
     }
 
-    /**
-     * 获取屏幕宽度
-     *
-     * @return
-     */
+
     @SuppressWarnings("deprecation")
     public static int getScreenWidth(Context context) {
         return ((WindowManager) context
@@ -43,11 +33,6 @@ public class ScreenUtils {
                 .getWidth();
     }
 
-    /**
-     * 获取屏幕宽度
-     *
-     * @return
-     */
     @SuppressWarnings("deprecation")
     public static int getScreenHeight(Context context) {
         return ((WindowManager) context

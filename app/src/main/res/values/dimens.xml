@@ -3,6 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="joystick_width">150dp</dimen>
-    <dimen name="joystick_height">150dp</dimen>
+    <dimen name="joystick_height">200dp</dimen>
 
 </resources>

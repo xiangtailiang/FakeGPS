@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FakeGPS</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_stop">Stop</string>
+    <string name="menu_delete">Delete</string>
+
+    <string name="title_activity_bookmark">Bookmark</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.tencent.fakegps;
+package com.tencent.fakegps.ui;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -8,6 +8,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import com.tencent.fakegps.IJoyStickPresenter;
+import com.tencent.fakegps.R;
+import com.tencent.fakegps.ScreenUtils;
 
 /**
  * Created by tiger on 7/22/16.
@@ -37,7 +41,7 @@ public class JoyStickView extends FrameLayout {
         super(context);
         mWindowManager = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
-        LayoutInflater.from(context).inflate(R.layout.joystick_arrow, this);
+        LayoutInflater.from(context).inflate(R.layout.joystick_layout, this);
 
         sStatusBarHeight = ScreenUtils.getStatusBarHeight(context);
         mViewWidth = context.getResources().getDimensionPixelSize(R.dimen.joystick_width);
@@ -55,6 +59,10 @@ public class JoyStickView extends FrameLayout {
         mWindowLayoutParams.height = mViewHeight;
         mWindowLayoutParams.x = ScreenUtils.getScreenWidth(context);
         mWindowLayoutParams.y = ScreenUtils.getScreenHeight(context) / 2;
+
+        findViewById(R.id.btn_set_loc).setOnClickListener(mOnClickListener);
+        findViewById(R.id.btn_fly_to).setOnClickListener(mOnClickListener);
+        findViewById(R.id.btn_copy_loc).setOnClickListener(mOnClickListener);
 
         findViewById(R.id.btn_up).setOnClickListener(mOnClickListener);
         findViewById(R.id.btn_left).setOnClickListener(mOnClickListener);
@@ -99,6 +107,18 @@ public class JoyStickView extends FrameLayout {
                     break;
                 case R.id.btn_right:
                     if (mJoyStickPresenter != null) mJoyStickPresenter.onArrowRightClick();
+                    break;
+
+                case R.id.btn_set_loc:
+                    if (mJoyStickPresenter != null) mJoyStickPresenter.onSetLocationClick();
+                    break;
+
+                case R.id.btn_fly_to:
+                    if (mJoyStickPresenter != null) mJoyStickPresenter.onFlyClick();
+                    break;
+
+                case R.id.btn_copy_loc:
+                    if (mJoyStickPresenter != null) mJoyStickPresenter.onBookmarkLocationClick();
                     break;
 
                 default:

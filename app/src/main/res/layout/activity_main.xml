@@ -8,11 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.tencent.fakegps.MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <LinearLayout
-        android:id="@+id/edit_ll"
+        android:id="@+id/ll_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -21,39 +21,103 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location:"
-            android:textSize="16sp"/>
+            android:textSize="20sp"/>
+
 
         <EditText
-            android:id="@+id/textLat"
+            android:id="@+id/inputLoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Latitude"
+            android:hint="Latitude , Longitude"
             android:textSize="16sp"/>
 
-        <EditText
-            android:id="@+id/textLon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Longitude"
-            android:textSize="16sp"/>
 
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_move_step"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_ll"
-        android:text="Start"/>
+        android:layout_below="@+id/ll_edit"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnStop"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Move Step"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/inputStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Move moveStep"
+            android:inputType="numberDecimal"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_bookmark"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnStart"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/btnStart"
-        android:text="Stop"/>
+        android:layout_below="@+id/ll_move_step"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Bookmark"
+        android:textSize="20sp"/>
+
+    <FrameLayout
+        android:id="@+id/fl_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_btn_container"
+        android:layout_below="@+id/tv_bookmark"
+    >
+        <ListView
+            android:id="@+id/list_bookmark"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"/>
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="No Data"
+            android:textSize="26sp"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Start"/>
+
+        <Button
+            android:id="@+id/btn_jump_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Jump to Location"/>
+
+        <Button
+            android:id="@+id/btn_fly_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fly to Location"/>
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>
