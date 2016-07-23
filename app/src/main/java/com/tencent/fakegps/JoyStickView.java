@@ -40,8 +40,8 @@ public class JoyStickView extends FrameLayout {
         LayoutInflater.from(context).inflate(R.layout.joystick_arrow, this);
 
         sStatusBarHeight = ScreenUtils.getStatusBarHeight(context);
-        mViewWidth = ScreenUtils.dip2px(context, 150);
-        mViewHeight = ScreenUtils.dip2px(context, 200);
+        mViewWidth = context.getResources().getDimensionPixelSize(R.dimen.joystick_width);
+        mViewHeight = context.getResources().getDimensionPixelSize(R.dimen.joystick_height);
 
         mWindowLayoutParams = new WindowManager.LayoutParams();
         mWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
