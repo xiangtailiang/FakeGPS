@@ -23,7 +23,6 @@ public class LocBookmark implements Serializable{
     @NotNull
     private String mName;
 
-//    @Mapping(Relation.OneToOne)
     private LocPoint mLocPoint;
 
 

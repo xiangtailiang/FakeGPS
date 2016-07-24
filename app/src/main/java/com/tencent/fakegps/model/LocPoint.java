@@ -6,10 +6,10 @@ import java.io.Serializable;
  * Created by tiger on 7/23/16.
  */
 public class LocPoint implements Serializable {
-    static final long serialVersionUID =-1770575152720897533L;
+    static final long serialVersionUID = -1770575152720897533L;
 
-    private double mLatitude = 37.802406;
-    private double mLongitude = -122.401779;
+    private double mLatitude;
+    private double mLongitude;
 
     public LocPoint(LocPoint locPoint) {
         mLatitude = locPoint.getLatitude();

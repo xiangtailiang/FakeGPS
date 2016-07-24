@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (currentLocPoint != null) {
             mLocEditText.setText(currentLocPoint.toString());
         } else {
-            mLocEditText.setText(new LocPoint(LAT_DEFAULT, LON_DEFAULT).toString());
+            mLocEditText.setText(DbUtils.getLastLocPoint(this));
         }
 
         //each move step delta
@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(this, "Input is not valid!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    LocPoint currentLocPoint = JoyStickManager.get().getCurrentLocPoint();
+                    if (currentLocPoint != null) {
+                        DbUtils.saveLastLocPoint(this, currentLocPoint);
+                    }
                     JoyStickManager.get().stop();
                     finish();
                 }
