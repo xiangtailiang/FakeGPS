@@ -40,6 +40,9 @@ public class BookmarkActivity extends AppCompatActivity implements View.OnClickL
         mLocEditText = (EditText) findViewById(R.id.inputLoc);
 
         mNameEditText.setText(name);
+        if (!TextUtils.isEmpty(name)) {
+            mNameEditText.setSelection(name.length());
+        }
         if (locPoint != null) {
             mLocEditText.setText(locPoint.toString());
         }
