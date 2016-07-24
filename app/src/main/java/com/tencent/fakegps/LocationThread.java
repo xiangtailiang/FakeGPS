@@ -97,7 +97,7 @@ public class LocationThread extends HandlerThread {
         @Override
         public void run() {
 
-            LocPoint locPoint = mJoyStickManager.getCurrentLocPoint();
+            LocPoint locPoint = mJoyStickManager.getUpdateLocPoint();
             Log.d(TAG, "UpdateLocation, " + locPoint);
             setMockLocation(1, mContext);
             Location location = new Location("gps");

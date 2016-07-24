@@ -7,7 +7,9 @@ import android.widget.Toast;
 
 import com.tencent.fakegps.model.LocPoint;
 import com.tencent.fakegps.ui.BookmarkActivity;
+import com.tencent.fakegps.ui.FlyToActivity;
 import com.tencent.fakegps.ui.JoyStickView;
+import com.tencent.fakegps.ui.MainActivity;
 
 /**
  * Created by tiger on 7/22/16.
@@ -28,6 +30,8 @@ public class JoyStickManager implements IJoyStickPresenter {
     private LocPoint mCurrentLocPoint;
 
     private LocPoint mTargetLocPoint;
+    private int mFlyTime;
+    private int mFlyTimeIndex;
     private boolean mIsFlyMode = false;
 
     private JoyStickView mJoyStickView;
@@ -89,12 +93,30 @@ public class JoyStickManager implements IJoyStickPresenter {
         return mCurrentLocPoint;
     }
 
-    public void jumpToLocation(LocPoint location) {
-
+    public LocPoint getUpdateLocPoint() {
+        if (!mIsFlyMode) {
+            return mCurrentLocPoint;
+        } else {
+            float factor = (float) mFlyTimeIndex / (float) mFlyTime;
+            double lat = mCurrentLocPoint.getLatitude() + (factor * (mTargetLocPoint.getLatitude() - mCurrentLocPoint.getLatitude()));
+            double lon = mCurrentLocPoint.getLongitude() + (factor * (mTargetLocPoint.getLatitude() - mCurrentLocPoint.getLatitude()));
+            mCurrentLocPoint.setLatitude(lat);
+            mCurrentLocPoint.setLongitude(lon);
+            mFlyTimeIndex++;
+            return mCurrentLocPoint;
+        }
     }
 
-    public void flyToLocation(LocPoint location) {
+    public void jumpToLocation(@NonNull LocPoint location) {
+        mIsFlyMode = false;
+        mCurrentLocPoint = location;
+    }
 
+    public void flyToLocation(@NonNull LocPoint location, int flyTime) {
+        mTargetLocPoint = location;
+        mFlyTime = flyTime;
+        mFlyTimeIndex = 0;
+        mIsFlyMode = true;
     }
 
     public boolean isFlyMode() {
@@ -117,11 +139,19 @@ public class JoyStickManager implements IJoyStickPresenter {
     @Override
     public void onSetLocationClick() {
         Log.d(TAG, "onSetLocationClick");
+        MainActivity.startPage(mContext);
     }
 
     @Override
     public void onFlyClick() {
         Log.d(TAG, "onFlyClick");
+        if (mIsFlyMode) {
+            stopFlyMode();
+            Toast.makeText(mContext, "Stop Fly", Toast.LENGTH_SHORT).show();
+        } else {
+            FlyToActivity.startPage(mContext);
+        }
+
     }
 
     @Override
@@ -130,12 +160,21 @@ public class JoyStickManager implements IJoyStickPresenter {
         if (mCurrentLocPoint != null) {
             LocPoint locPoint = new LocPoint(mCurrentLocPoint);
             BookmarkActivity.startPage(mContext, "Bookmark", locPoint);
-            FakeGpsUtils.copyToClipboard(mContext, locPoint.toString());
             Toast.makeText(mContext, "Current location is copied!" + "\n" + locPoint, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(mContext, "Service is not start!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onCopyLocationClick() {
+        Log.d(TAG, "onCopyLocationClick");
+        if (mCurrentLocPoint != null) {
+            FakeGpsUtils.copyToClipboard(mContext, mCurrentLocPoint.toString());
+            Toast.makeText(mContext, "Current location is copied!" + "\n" + mCurrentLocPoint, Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     @Override
     public void onArrowUpClick() {

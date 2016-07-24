@@ -5,5 +5,14 @@
     <string name="menu_delete">Delete</string>
 
     <string name="title_activity_bookmark">Bookmark</string>
+    <string name="btn_fly_start">Start Fly</string>
+    <string name="btn_fly_stop">Stop Fly</string>
+    <string name="btn_set_new_loc">Set New Location</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="move_step">Move Step</string>
+    <string name="move_step_hit">Move Step</string>
+    <string name="loc_input_hint">Latitude , Longitude</string>
+    <string name="location">Location:</string>
+    <string name="fly_time">Fly Time(s)</string>
 
 </resources>

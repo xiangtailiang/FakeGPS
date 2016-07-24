@@ -23,10 +23,10 @@
             android:src="@drawable/ic_flight_takeoff"/>
 
         <ImageButton
-            android:id="@+id/btn_copy_loc"
+            android:id="@+id/btn_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_copy_loc"/>
+            android:src="@drawable/ic_bookmark"/>
 
 
     </LinearLayout>

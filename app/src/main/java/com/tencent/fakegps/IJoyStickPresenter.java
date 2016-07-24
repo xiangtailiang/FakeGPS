@@ -10,6 +10,8 @@ public interface IJoyStickPresenter {
 
     void onBookmarkLocationClick();
 
+    void onCopyLocationClick();
+
     void onArrowUpClick();
 
     void onArrowDownClick();

@@ -62,7 +62,16 @@ public class JoyStickView extends FrameLayout {
 
         findViewById(R.id.btn_set_loc).setOnClickListener(mOnClickListener);
         findViewById(R.id.btn_fly_to).setOnClickListener(mOnClickListener);
-        findViewById(R.id.btn_copy_loc).setOnClickListener(mOnClickListener);
+        findViewById(R.id.btn_bookmark).setOnClickListener(mOnClickListener);
+        findViewById(R.id.btn_bookmark).setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mJoyStickPresenter != null) {
+                    mJoyStickPresenter.onCopyLocationClick();
+                }
+                return true;
+            }
+        });
 
         findViewById(R.id.btn_up).setOnClickListener(mOnClickListener);
         findViewById(R.id.btn_left).setOnClickListener(mOnClickListener);
@@ -117,7 +126,7 @@ public class JoyStickView extends FrameLayout {
                     if (mJoyStickPresenter != null) mJoyStickPresenter.onFlyClick();
                     break;
 
-                case R.id.btn_copy_loc:
+                case R.id.btn_bookmark:
                     if (mJoyStickPresenter != null) mJoyStickPresenter.onBookmarkLocationClick();
                     break;
 

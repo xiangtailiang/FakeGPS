@@ -45,13 +45,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/move_step"
+            android:text="@string/fly_time"
             android:textSize="16sp"/>
         <EditText
-            android:id="@+id/inputStep"
+            android:id="@+id/inputFlyTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/move_step_hit"
+            android:hint="@string/fly_time"
             android:inputType="numberDecimal"
             android:textSize="16sp"/>
 
@@ -95,19 +95,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical">
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_start"/>
 
         <Button
-            android:id="@+id/btn_set_loc"
+            android:id="@+id/btn_fly"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_set_new_loc"/>
+            android:text="@string/btn_fly_start"/>
 
 
     </LinearLayout>

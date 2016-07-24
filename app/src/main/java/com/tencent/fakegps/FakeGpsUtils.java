@@ -49,4 +49,16 @@ public final class FakeGpsUtils {
         return step;
     }
 
+    public static int getIntValueFromInput(Context context, EditText editText) {
+        int value = 0;
+        String stepStr = editText.getText().toString().trim();
+        try {
+            value = Integer.valueOf(stepStr);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "Parse move step error!", e);
+        }
+
+        return value;
+    }
+
 }

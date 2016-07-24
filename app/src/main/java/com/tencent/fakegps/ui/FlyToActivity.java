@@ -25,26 +25,27 @@ import com.tencent.fakegps.model.LocPoint;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class FlyToActivity extends AppCompatActivity implements View.OnClickListener {
     //    private final double LAT_DEFAULT = 37.802406;
 //    private final double LON_DEFAULT = -122.401779;
     private final double LAT_DEFAULT = 23.151637;
     private final double LON_DEFAULT = 113.344721;
 
+    private final int FLY_TIME_DEFAULT = 60;
+
     public static final int DELETE_ID = 1001;
 
     private EditText mLocEditText;
-    private EditText mMoveStepEditText;
+    private EditText mFlyTimeEditText;
     private ListView mListView;
     private Button mBtnStart;
-    private Button mBtnSetNew;
     private BookmarkAdapter mAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fly);
 
         //location input
         mLocEditText = (EditText) findViewById(R.id.inputLoc);
@@ -56,19 +57,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //each move step delta
-        mMoveStepEditText = (EditText) findViewById(R.id.inputStep);
-        double currentMoveStep = JoyStickManager.get().getMoveStep();
-        mMoveStepEditText.setText(String.valueOf(currentMoveStep));
+        mFlyTimeEditText = (EditText) findViewById(R.id.inputFlyTime);
+        mFlyTimeEditText.setText(String.valueOf(FLY_TIME_DEFAULT));
 
         mListView = (ListView) findViewById(R.id.list_bookmark);
 
-        mBtnStart = (Button) findViewById(R.id.btn_start);
+        mBtnStart = (Button) findViewById(R.id.btn_fly);
         mBtnStart.setOnClickListener(this);
-        updateBtnStart();
-
-        mBtnSetNew = (Button) findViewById(R.id.btn_set_loc);
-        mBtnSetNew.setOnClickListener(this);
-        updateBtnSetNew();
+        updateBtn();
 
         initListView();
 
@@ -77,51 +73,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        double step = FakeGpsUtils.getMoveStepFromInput(this, mMoveStepEditText);
+        int flyTime = FakeGpsUtils.getIntValueFromInput(this, mFlyTimeEditText);
         LocPoint point = FakeGpsUtils.getLocPointFromInput(this, mLocEditText);
 
         switch (view.getId()) {
-            case R.id.btn_start:
-                if (!JoyStickManager.get().isStarted()) {
-                    JoyStickManager.get().setMoveStep(step);
-                    if (point != null) {
-                        JoyStickManager.get().start(point);
-                        finish();
+
+            case R.id.btn_fly:
+                if (JoyStickManager.get().isStarted()) {
+                    if (JoyStickManager.get().isFlyMode()) {
+                        JoyStickManager.get().stopFlyMode();
                     } else {
-                        Toast.makeText(this, "Input is not valid!", Toast.LENGTH_SHORT).show();
+                        if (point != null && flyTime > 0) {
+                            JoyStickManager.get().flyToLocation(point, flyTime);
+                        } else {
+                            Toast.makeText(this, "Input is not valid!", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } else {
-                    JoyStickManager.get().stop();
-                    finish();
                 }
-                updateBtnStart();
-                updateBtnSetNew();
-                break;
-
-            case R.id.btn_set_loc:
-                if (step > 0 && point != null) {
-                    JoyStickManager.get().setMoveStep(step);
-                    JoyStickManager.get().jumpToLocation(point);
-                } else {
-                    Toast.makeText(this, "Input is not valid!", Toast.LENGTH_SHORT).show();
-                }
+                updateBtn();
                 break;
         }
     }
 
-    private void updateBtnStart() {
-        if (JoyStickManager.get().isStarted()) {
-            mBtnStart.setText(R.string.btn_stop);
+    private void updateBtn() {
+        if (JoyStickManager.get().isFlyMode()) {
+            mBtnStart.setText(R.string.btn_fly_stop);
         } else {
-            mBtnStart.setText(R.string.btn_start);
-        }
-    }
-
-    private void updateBtnSetNew() {
-        if (JoyStickManager.get().isStarted()) {
-            mBtnSetNew.setEnabled(true);
-        } else {
-            mBtnSetNew.setEnabled(false);
+            mBtnStart.setText(R.string.btn_fly_start);
         }
     }
 
@@ -181,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public static void startPage(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, FlyToActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

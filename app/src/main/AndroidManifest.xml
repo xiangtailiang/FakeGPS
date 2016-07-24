@@ -47,6 +47,12 @@
                   android:theme="@style/Theme.AppCompat.Dialog"
                   android:windowSoftInputMode="stateHidden"/>
 
+        <activity android:name=".ui.FlyToActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:label="@string/title_activity_bookmark"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden"/>
+
     </application>
 
 </manifest>
