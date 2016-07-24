@@ -4,7 +4,7 @@ FakeGPS是一个GPS设备模拟器，能够根据给定的坐标，输出GPS定�
 
 借助FakeGPS，在玩Pokemon Go的时候，实现坐在室内却可以让游戏认为你在美国街头游走的效果。（FakeGPS之所以能够诞生，就是因为Pokemon Go (*@ο@*) ）
 
-[下载地址](https://github.com/xiangtailiang/FakeGPS/blob/master/release/README.md)
+[下载地址](https://github.com/xiangtailiang/FakeGPS/blob/master/release/FakeGPS.apk)  `release/FakeGPS.apk`
 
 按照惯例，先放两张图。
 
