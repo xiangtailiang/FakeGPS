@@ -94,7 +94,7 @@ public class JoyStickManager implements IJoyStickPresenter {
     }
 
     public LocPoint getUpdateLocPoint() {
-        if (!mIsFlyMode) {
+        if (!mIsFlyMode || mFlyTimeIndex > mFlyTime) {
             return mCurrentLocPoint;
         } else {
             float factor = (float) mFlyTimeIndex / (float) mFlyTime;
