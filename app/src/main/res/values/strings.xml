@@ -11,9 +11,13 @@
     <string name="btn_set_new_loc">Set New Location</string>
     <string name="bookmark">Bookmark</string>
     <string name="move_step">Move Step</string>
-    <string name="move_step_hit">Move Step</string>
+    <string name="move_step_hint">Move Step</string>
     <string name="loc_input_hint">Latitude , Longitude</string>
     <string name="location">Location:</string>
     <string name="fly_time">Fly Time(s)</string>
+    <string name="bookmark_name">Bookmark Name</string>
+    <string name="no_data">No Bookmarks</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

@@ -51,7 +51,7 @@
             android:id="@+id/inputStep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/move_step_hit"
+            android:hint="@string/move_step_hint"
             android:inputType="numberDecimal"
             android:textSize="16sp"/>
 
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No Data"
+            android:text="@string/no_data"
             android:textSize="26sp"/>
     </FrameLayout>
 
