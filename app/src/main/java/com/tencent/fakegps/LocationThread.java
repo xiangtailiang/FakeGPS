@@ -1,6 +1,7 @@
 package com.tencent.fakegps;
 
 import android.content.Context;
+import android.location.ILocationManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.util.Log;
 
 import com.tencent.fakegps.model.LocPoint;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -31,18 +33,34 @@ public class LocationThread extends HandlerThread {
     private Handler mHandler;
     private LocPoint mLastLocPoint = new LocPoint(0, 0);
 
-    private Method mMethodMakeComplete;
+    private static Method mMethodMakeComplete;
+    private static ILocationManager mILocationManager;
 
     public LocationThread(Context context, JoyStickManager joyStickManager) {
         super("LocationThread");
         mContext = context;
         mJoyStickManager = joyStickManager;
+
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        try {
-            mMethodMakeComplete = Location.class.getMethod("makeComplete", new Class[0]);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        if (mMethodMakeComplete == null) {
+            try {
+                mMethodMakeComplete = Location.class.getMethod("makeComplete", new Class[0]);
+            } catch (NoSuchMethodException e) {
+                Log.e(TAG, "get Location.makeComplete method fail!", e);
+            }
         }
+
+        if (mILocationManager == null) {
+            Field declaredField = null;
+            try {
+                declaredField = Class.forName(mLocationManager.getClass().getName()).getDeclaredField("mService");
+                declaredField.setAccessible(true);
+                mILocationManager = (ILocationManager) declaredField.get(mLocationManager);
+            } catch (Exception e) {
+                Log.e(TAG, "get LocationManager mService fail!", e);
+            }
+        }
+
 
     }
 
@@ -63,20 +81,6 @@ public class LocationThread extends HandlerThread {
         try {
             quit();
             interrupt();
-            setMockLocation(1, mContext);
-            try {
-                mLocationManager.removeTestProvider("gps");
-            } catch (Exception e) {
-                Log.e("Excp gps", e.toString());
-                try {
-                    mLocationManager.removeTestProvider("network");
-                } catch (Exception e2) {
-                    Log.e("Excp network", e.toString());
-                }
-            }
-            mLocationManager.removeTestProvider("network");
-
-            setMockLocation(0, mContext);
         } catch (Exception e) {
             Log.e(TAG, "stopThread fail!", e);
         }
@@ -86,6 +90,7 @@ public class LocationThread extends HandlerThread {
 
 
     protected static boolean setMockLocation(int i, Context context) {
+        Log.d(TAG, "setMockLocation " + i);
         try {
             return Settings.Secure.putInt(context.getContentResolver(), "mock_location", i);
         } catch (Exception e) {
@@ -99,7 +104,6 @@ public class LocationThread extends HandlerThread {
 
             LocPoint locPoint = mJoyStickManager.getUpdateLocPoint();
             Log.d(TAG, "UpdateLocation, " + locPoint);
-            setMockLocation(1, mContext);
             Location location = new Location("gps");
             try {
                 location.setLatitude(locPoint.getLatitude());
@@ -125,16 +129,12 @@ public class LocationThread extends HandlerThread {
                         e.printStackTrace();
                     }
                 }
-                mLocationManager.addTestProvider("gps", false, false, false, false, false, false, false, 1, 1);
-                mLocationManager.setTestProviderStatus("gps", 2, null, System.currentTimeMillis());
-                mLocationManager.setTestProviderLocation("gps", location);
-                mLocationManager.addTestProvider("network", true, false, true, false, false, false, false, 1, 2);
-                mLocationManager.setTestProviderStatus("network", 2, null, System.currentTimeMillis());
-                mLocationManager.setTestProviderLocation("network", location);
+
+                mILocationManager.reportLocation(location, false);
+
             } catch (Exception e) {
                 Log.e(TAG, "add Location fail!", e);
             }
-
 
             mHandler.postDelayed(mUpdateLocation, 1000);
         }

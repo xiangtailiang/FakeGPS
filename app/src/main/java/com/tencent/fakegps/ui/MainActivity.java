@@ -26,10 +26,10 @@ import com.tencent.fakegps.model.LocPoint;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //    private final double LAT_DEFAULT = 37.802406;
-//    private final double LON_DEFAULT = -122.401779;
-    private final double LAT_DEFAULT = 23.151637;
-    private final double LON_DEFAULT = 113.344721;
+    private final double LAT_DEFAULT = 37.802406;
+    private final double LON_DEFAULT = -122.401779;
+//    private final double LAT_DEFAULT = 23.151637;
+//    private final double LON_DEFAULT = 113.344721;
 
     public static final int DELETE_ID = 1001;
 
@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static void startPage(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
