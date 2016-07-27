@@ -2,16 +2,17 @@
 
 FakeGPS是一个GPS设备模拟器，能够根据给定的坐标，输出GPS定位信号，并且带有全局悬浮窗的手柄，通过手柄上的方向按键，能够模拟用户在地图上行走。
 
-FakeGPS之所以能够诞生，就是因为Pokemon Go，希望实现坐在室内却可以让游戏认为你在美国街头游走的效果。但很遗憾目前还有点问题(*@ο@*) 。
+FakeGPS之所以能够诞生，就是因为Pokemon Go，希望实现坐在室内却可以让游戏认为你在美国街头游走的效果。终于，成功了。
+
+按照惯例，先放截图。
+
+![Screenshot_1](./screenshot/Screenshot_1.png)
+
+![Screenshot_2](./screenshot/Screenshot_2.png)
+
+![Screenshot_3](./screenshot/Screenshot_3.png)
 
 [下载地址](https://github.com/xiangtailiang/FakeGPS/blob/master/release/FakeGPS.apk)  `release/FakeGPS.apk`
-
-按照惯例，先放两张图。
-
-![Screenshot_1](./screenshot/Screenshot_2016-07-24-08-45-53.png)
-
-![Screenshot_2](./screenshot/Screenshot_2016-07-24-08-45-42.png)
-
 
 #功能描述
 - 模拟真实的GPS设备，每秒输出GPS定位信号。
