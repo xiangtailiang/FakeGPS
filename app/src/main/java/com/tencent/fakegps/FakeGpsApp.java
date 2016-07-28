@@ -25,6 +25,10 @@ public class FakeGpsApp extends Application {
         JoyStickManager.get().init(this);
     }
 
+    public static Context get() {
+        return sAppContext;
+    }
+
     public static LiteOrm getLiteOrm() {
         if (sLiteOrm == null) {
             synchronized (FakeGpsApp.class) {
@@ -36,4 +40,5 @@ public class FakeGpsApp extends Application {
         }
         return sLiteOrm;
     }
+
 }

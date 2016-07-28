@@ -1,7 +1,9 @@
 package com.tencent.fakegps;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.tencent.fakegps.model.LocBookmark;
@@ -26,12 +28,17 @@ public final class DbUtils {
         if (bookmark == null) {
             return -1;
         }
-        return FakeGpsApp.getLiteOrm().insert(bookmark, ConflictAlgorithm.Replace);
+        long id = FakeGpsApp.getLiteOrm().insert(bookmark, ConflictAlgorithm.Replace);
+        if (id != -1) {
+            notifyBookmarkUpdate();
+        }
+        return id;
     }
 
     public static void deleteBookmark(LocBookmark bookmark) {
         if (bookmark == null) return;
         FakeGpsApp.getLiteOrm().delete(bookmark);
+        notifyBookmarkUpdate();
     }
 
     public static void saveBookmark(Collection<LocBookmark> bookmarks) {
@@ -52,6 +59,11 @@ public final class DbUtils {
     public static String getLastLocPoint(@NonNull Context context) {
         return context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
                 .getString(KEY_LAST_LOC, "");
+    }
+
+    public static void notifyBookmarkUpdate() {
+        Intent intent = new Intent(BroadcastEvent.BookMark.ACTION_BOOK_MARK_UPDATE);
+        LocalBroadcastManager.getInstance(FakeGpsApp.get()).sendBroadcast(intent);
     }
 
 }

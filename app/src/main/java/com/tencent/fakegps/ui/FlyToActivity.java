@@ -1,11 +1,15 @@
 package com.tencent.fakegps.ui;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +20,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.tencent.fakegps.BroadcastEvent;
 import com.tencent.fakegps.DbUtils;
+import com.tencent.fakegps.FakeGpsApp;
 import com.tencent.fakegps.FakeGpsUtils;
 import com.tencent.fakegps.JoyStickManager;
 import com.tencent.fakegps.R;
@@ -53,9 +59,13 @@ public class FlyToActivity extends AppCompatActivity implements View.OnClickList
         if (currentLocPoint != null) {
             mLocEditText.setText(currentLocPoint.toString());
         } else {
-            mLocEditText.setText(new LocPoint(LAT_DEFAULT, LON_DEFAULT).toString());
+            String lastLocPoint = DbUtils.getLastLocPoint(this);
+            if (!TextUtils.isEmpty(lastLocPoint)) {
+                mLocEditText.setText(lastLocPoint);
+            } else {
+                mLocEditText.setText(new LocPoint(LAT_DEFAULT, LON_DEFAULT).toString());
+            }
         }
-
         //each move step delta
         mFlyTimeEditText = (EditText) findViewById(R.id.inputFlyTime);
         mFlyTimeEditText.setText(String.valueOf(FLY_TIME_DEFAULT));
@@ -68,7 +78,7 @@ public class FlyToActivity extends AppCompatActivity implements View.OnClickList
 
         initListView();
 
-
+        registerBroadcastReceiver();
     }
 
     @Override
@@ -156,6 +166,32 @@ public class FlyToActivity extends AppCompatActivity implements View.OnClickList
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
+    }
+
+    private void registerBroadcastReceiver() {
+        IntentFilter intentFilter = new IntentFilter(BroadcastEvent.BookMark.ACTION_BOOK_MARK_UPDATE);
+        LocalBroadcastManager.getInstance(FakeGpsApp.get()).registerReceiver(mBroadcastReceiver, intentFilter);
+    }
+
+    private void unregisterBroadcastReceiver() {
+        LocalBroadcastManager.getInstance(FakeGpsApp.get()).unregisterReceiver(mBroadcastReceiver);
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (BroadcastEvent.BookMark.ACTION_BOOK_MARK_UPDATE.equals(action)) {
+                ArrayList<LocBookmark> allBookmark = DbUtils.getAllBookmark();
+                mAdapter.setLocBookmarkList(allBookmark);
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        unregisterBroadcastReceiver();
+        super.onDestroy();
     }
 
     public static void startPage(Context context) {
