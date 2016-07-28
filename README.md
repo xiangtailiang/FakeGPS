@@ -23,7 +23,7 @@ FakeGPS另外一个很有意思的用途就是Pokemon Go，在中国大陆地区
 - 长按书签按钮可以复制当前坐标到剪切板，方便分享给其他小伙伴。
 
 #安装说明
-由于模拟位置需要借助系统的`ACCESS_MOCK_LOCATION`权限，因此FakeGPS 需要以system的权限，安装到system分区中。
+由于模拟位置需要借助系统的`INSTALL_LOCATION_PROVIDER`权限，因此FakeGPS 需要以system的权限，安装到system分区中。
 
 - 1、Root手机，获取system分区的读写权限。
 - 2、借助[Lucky Patcher](htt
