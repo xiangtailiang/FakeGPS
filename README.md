@@ -13,7 +13,7 @@ FakeGPS另外一个很有意思的用途就是Pokemon Go，在中国大陆地区
 
 ![Screenshot_3](./screenshot/Screenshot_3.png)
 
-[下载地址](https://github.com/xiangtailiang/FakeGPS/blob/master/release/FakeGPS.apk)  `release/FakeGPS.apk`
+[下载地址](https://github.com/xiangtailiang/FakeGPS/releases/tag/0.2)
 
 #功能描述
 - 模拟真实的GPS设备，每秒输出GPS定位信号。
