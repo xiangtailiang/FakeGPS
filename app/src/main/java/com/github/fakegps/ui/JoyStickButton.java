@@ -1,4 +1,4 @@
-package com.tencent.fakegps.ui;
+package com.github.fakegps.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

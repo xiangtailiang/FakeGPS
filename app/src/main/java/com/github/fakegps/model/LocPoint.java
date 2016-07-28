@@ -1,4 +1,4 @@
-package com.tencent.fakegps.model;
+package com.github.fakegps.model;
 
 import java.io.Serializable;
 

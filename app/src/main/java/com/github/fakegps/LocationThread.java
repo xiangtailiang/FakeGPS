@@ -1,4 +1,4 @@
-package com.tencent.fakegps;
+package com.github.fakegps;
 
 import android.content.Context;
 import android.location.ILocationManager;
@@ -11,7 +11,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.tencent.fakegps.model.LocPoint;
+import com.github.fakegps.model.LocPoint;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

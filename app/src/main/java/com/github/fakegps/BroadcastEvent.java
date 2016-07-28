@@ -1,4 +1,4 @@
-package com.tencent.fakegps;
+package com.github.fakegps;
 
 /**
  * Created by tiger on 7/28/16.

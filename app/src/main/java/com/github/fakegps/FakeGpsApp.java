@@ -1,4 +1,4 @@
-package com.tencent.fakegps;
+package com.github.fakegps;
 
 import android.app.Application;
 import android.content.Context;

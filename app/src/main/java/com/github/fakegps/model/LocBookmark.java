@@ -1,4 +1,4 @@
-package com.tencent.fakegps.model;
+package com.github.fakegps.model;
 
 import com.litesuits.orm.db.annotation.Column;
 import com.litesuits.orm.db.annotation.NotNull;

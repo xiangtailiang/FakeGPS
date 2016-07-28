@@ -1,4 +1,4 @@
-package com.tencent.fakegps.ui;
+package com.github.fakegps.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tencent.fakegps.R;
-import com.tencent.fakegps.model.LocBookmark;
+import com.github.fakegps.model.LocBookmark;
 
 import java.util.ArrayList;
 import java.util.List;

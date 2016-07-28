@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.tencent.fakegps"
+        applicationId "com.github.fakegps"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -24,6 +24,16 @@ android {
             storePassword project.hasProperty('STOREPASS') ? STOREPASS : 'apptest'
             keyAlias project.hasProperty('KEYALIAS') ? KEYALIAS : 'apptest'
             keyPassword project.hasProperty('KEYPASS') ? KEYPASS : 'apptest'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "FakeGPS_v${defaultConfig.versionName}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
         }
     }
 

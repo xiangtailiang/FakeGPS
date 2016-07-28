@@ -1,11 +1,11 @@
-package com.tencent.fakegps;
+package com.github.fakegps;
 
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.tencent.fakegps.model.LocPoint;
+import com.github.fakegps.model.LocPoint;
 
 /**
  * Created by tiger on 7/23/16.

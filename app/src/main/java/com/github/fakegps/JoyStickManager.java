@@ -1,15 +1,15 @@
-package com.tencent.fakegps;
+package com.github.fakegps;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.tencent.fakegps.model.LocPoint;
-import com.tencent.fakegps.ui.BookmarkActivity;
-import com.tencent.fakegps.ui.FlyToActivity;
-import com.tencent.fakegps.ui.JoyStickView;
-import com.tencent.fakegps.ui.MainActivity;
+import com.github.fakegps.model.LocPoint;
+import com.github.fakegps.ui.BookmarkActivity;
+import com.github.fakegps.ui.FlyToActivity;
+import com.github.fakegps.ui.JoyStickView;
+import com.github.fakegps.ui.MainActivity;
 
 /**
  * Created by tiger on 7/22/16.

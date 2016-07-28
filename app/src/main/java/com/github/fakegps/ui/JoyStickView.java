@@ -1,4 +1,4 @@
-package com.tencent.fakegps.ui;
+package com.github.fakegps.ui;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.tencent.fakegps.IJoyStickPresenter;
+import com.github.fakegps.IJoyStickPresenter;
 import com.tencent.fakegps.R;
-import com.tencent.fakegps.ScreenUtils;
+import com.github.fakegps.ScreenUtils;
 
 /**
  * Created by tiger on 7/22/16.

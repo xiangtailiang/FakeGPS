@@ -1,4 +1,4 @@
-package com.tencent.fakegps.ui;
+package com.github.fakegps.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tencent.fakegps.DbUtils;
-import com.tencent.fakegps.FakeGpsUtils;
+import com.github.fakegps.DbUtils;
+import com.github.fakegps.FakeGpsUtils;
 import com.tencent.fakegps.R;
-import com.tencent.fakegps.model.LocBookmark;
-import com.tencent.fakegps.model.LocPoint;
+import com.github.fakegps.model.LocBookmark;
+import com.github.fakegps.model.LocPoint;
 
 /**
  * BookmarkActivity
