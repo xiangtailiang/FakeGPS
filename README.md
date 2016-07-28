@@ -13,7 +13,7 @@ FakeGPS另外一个很有意思的用途就是Pokemon Go，在中国大陆地区
 
 ![Screenshot_3](./screenshot/Screenshot_3.png)
 
-[下载地址](https://github.com/xiangtailiang/FakeGPS/releases/tag/0.2)
+[下载地址](https://github.com/xiangtailiang/FakeGPS/releases/tag/1.0)
 
 #功能描述
 - 模拟真实的GPS设备，每秒输出GPS定位信号。
@@ -36,6 +36,7 @@ ps://lucky-patcher.netbew.com/) 把FakeGPS以系统应用的方式安装。
 
 欢迎各位同学发pull request来帮忙改进，谢谢大家。
 
-
+## License
+[The MIT License (MIT)](http://opensource.org/licenses/MIT)
 
 
