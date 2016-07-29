@@ -1,6 +1,6 @@
 #FakeGPS
 
-[中文Readme](https://github.com/xiangtailiang/FakeGPS/README_CN.md)
+[中文Readme](https://github.com/xiangtailiang/FakeGPS/blob/master/README_CN.md)
 
 FakeGPS is a GPS device simulator. GPS location signal keep output according to the given coordinates. By the direction keys on the joystick, the user can simulate walking on the map.
 
@@ -12,11 +12,11 @@ FakeGPS is a GPS device simulator. GPS location signal keep output according to 
 
 #Screenshots.
 
-! [Screenshot_1](./ screenshot / Screenshot_1.png)
+![Screenshot_1](./screenshot/Screenshot_1.png)
 
-! [Screenshot_2](./ screenshot / Screenshot_2.png)
+![Screenshot_2](./screenshot/Screenshot_2.png)
 
-! [Screenshot_3](./ screenshot / Screenshot_3.png)
+![Screenshot_3](./screenshot/Screenshot_3.png)
 
 # Download
 [FakeGPS V1.0](https://github.com/xiangtailiang/FakeGPS/releases/tag/1.0)
