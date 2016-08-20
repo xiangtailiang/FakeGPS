@@ -13,8 +13,8 @@ import java.io.Serializable;
  * Created by tiger on 7/23/16.
  */
 @Table("LocBookmark")
-public class LocBookmark implements Serializable{
-    static final long serialVersionUID =-1770575152720897666L;
+public class LocBookmark implements Serializable {
+    static final long serialVersionUID = -1770575152720897666L;
 
     @PrimaryKey(AssignType.AUTO_INCREMENT)
     @Column("_id")

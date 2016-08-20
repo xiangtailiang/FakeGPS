@@ -25,9 +25,9 @@ import com.github.fakegps.DbUtils;
 import com.github.fakegps.FakeGpsApp;
 import com.github.fakegps.FakeGpsUtils;
 import com.github.fakegps.JoyStickManager;
-import com.tencent.fakegps.R;
 import com.github.fakegps.model.LocBookmark;
 import com.github.fakegps.model.LocPoint;
+import com.tencent.fakegps.R;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,6 @@ package com.github.fakegps;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.github.fakegps.model.LocPoint;
@@ -10,6 +9,8 @@ import com.github.fakegps.ui.BookmarkActivity;
 import com.github.fakegps.ui.FlyToActivity;
 import com.github.fakegps.ui.JoyStickView;
 import com.github.fakegps.ui.MainActivity;
+
+import tiger.radio.loggerlibrary.Logger;
 
 /**
  * Created by tiger on 7/22/16.
@@ -138,13 +139,13 @@ public class JoyStickManager implements IJoyStickPresenter {
 
     @Override
     public void onSetLocationClick() {
-        Log.d(TAG, "onSetLocationClick");
+        Logger.d(TAG, "onSetLocationClick");
         MainActivity.startPage(mContext);
     }
 
     @Override
     public void onFlyClick() {
-        Log.d(TAG, "onFlyClick");
+        Logger.d(TAG, "onFlyClick");
         if (mIsFlyMode) {
             stopFlyMode();
             Toast.makeText(mContext, "Stop Fly", Toast.LENGTH_SHORT).show();
@@ -156,7 +157,7 @@ public class JoyStickManager implements IJoyStickPresenter {
 
     @Override
     public void onBookmarkLocationClick() {
-        Log.d(TAG, "onBookmarkLocationClick");
+        Logger.d(TAG, "onBookmarkLocationClick");
         if (mCurrentLocPoint != null) {
             LocPoint locPoint = new LocPoint(mCurrentLocPoint);
             BookmarkActivity.startPage(mContext, "Bookmark", locPoint);
@@ -168,7 +169,7 @@ public class JoyStickManager implements IJoyStickPresenter {
 
     @Override
     public void onCopyLocationClick() {
-        Log.d(TAG, "onCopyLocationClick");
+        Logger.d(TAG, "onCopyLocationClick");
         if (mCurrentLocPoint != null) {
             FakeGpsUtils.copyToClipboard(mContext, mCurrentLocPoint.toString());
             Toast.makeText(mContext, "Current location is copied!" + "\n" + mCurrentLocPoint, Toast.LENGTH_LONG).show();
@@ -178,25 +179,25 @@ public class JoyStickManager implements IJoyStickPresenter {
 
     @Override
     public void onArrowUpClick() {
-        Log.d(TAG, "onArrowUpClick");
+        Logger.d(TAG, "onArrowUpClick");
         mCurrentLocPoint.setLatitude(mCurrentLocPoint.getLatitude() + mMoveStep);
     }
 
     @Override
     public void onArrowDownClick() {
-        Log.d(TAG, "onArrowDownClick");
+        Logger.d(TAG, "onArrowDownClick");
         mCurrentLocPoint.setLatitude(mCurrentLocPoint.getLatitude() - mMoveStep);
     }
 
     @Override
     public void onArrowLeftClick() {
-        Log.d(TAG, "onArrowLeftClick");
+        Logger.d(TAG, "onArrowLeftClick");
         mCurrentLocPoint.setLongitude(mCurrentLocPoint.getLongitude() - mMoveStep);
     }
 
     @Override
     public void onArrowRightClick() {
-        Log.d(TAG, "onArrowRightClick");
+        Logger.d(TAG, "onArrowRightClick");
         mCurrentLocPoint.setLongitude(mCurrentLocPoint.getLongitude() + mMoveStep);
     }
 

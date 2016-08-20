@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.tencent.fakegps.R;
 import com.github.fakegps.model.LocBookmark;
+import com.tencent.fakegps.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.github.fakegps.IJoyStickPresenter;
-import com.tencent.fakegps.R;
 import com.github.fakegps.ScreenUtils;
+import com.tencent.fakegps.R;
 
 /**
  * Created by tiger on 7/22/16.

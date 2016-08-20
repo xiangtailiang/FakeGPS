@@ -2,9 +2,10 @@ package com.github.fakegps.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageButton;
+
+import tiger.radio.loggerlibrary.Logger;
 
 /**
  * Button can keep invoke click event when keep pressed
@@ -50,7 +51,7 @@ public class JoyStickButton extends ImageButton {
         @Override
         public void run() {
             if (mIsPressDown) {
-                Log.d(TAG, "invoke click");
+                Logger.d(TAG, "invoke click");
                 performClick();
                 postDelayed(this, 500);
             }

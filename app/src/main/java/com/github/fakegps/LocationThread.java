@@ -9,13 +9,14 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.util.Log;
 
 import com.github.fakegps.model.LocPoint;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import tiger.radio.loggerlibrary.Logger;
 
 /**
  * LocationThread
@@ -46,7 +47,7 @@ public class LocationThread extends HandlerThread {
             try {
                 mMethodMakeComplete = Location.class.getMethod("makeComplete", new Class[0]);
             } catch (NoSuchMethodException e) {
-                Log.e(TAG, "get Location.makeComplete method fail!", e);
+                Logger.e(TAG, "get Location.makeComplete method fail!", e);
             }
         }
 
@@ -57,7 +58,7 @@ public class LocationThread extends HandlerThread {
                 declaredField.setAccessible(true);
                 mILocationManager = (ILocationManager) declaredField.get(mLocationManager);
             } catch (Exception e) {
-                Log.e(TAG, "get LocationManager mService fail!", e);
+                Logger.e(TAG, "get LocationManager mService fail!", e);
             }
         }
 
@@ -82,7 +83,7 @@ public class LocationThread extends HandlerThread {
             quit();
             interrupt();
         } catch (Exception e) {
-            Log.e(TAG, "stopThread fail!", e);
+            Logger.e(TAG, "stopThread fail!", e);
         }
 
         mJoyStickManager = null;
@@ -90,7 +91,7 @@ public class LocationThread extends HandlerThread {
 
 
     protected static boolean setMockLocation(int i, Context context) {
-        Log.d(TAG, "setMockLocation " + i);
+        Logger.d(TAG, "setMockLocation " + i);
         try {
             return Settings.Secure.putInt(context.getContentResolver(), "mock_location", i);
         } catch (Exception e) {
@@ -103,7 +104,7 @@ public class LocationThread extends HandlerThread {
         public void run() {
 
             LocPoint locPoint = mJoyStickManager.getUpdateLocPoint();
-            Log.d(TAG, "UpdateLocation, " + locPoint);
+            Logger.d(TAG, "UpdateLocation, " + locPoint);
             Location location = new Location("gps");
             try {
                 location.setLatitude(locPoint.getLatitude());
@@ -133,7 +134,7 @@ public class LocationThread extends HandlerThread {
                 mILocationManager.reportLocation(location, false);
 
             } catch (Exception e) {
-                Log.e(TAG, "add Location fail!", e);
+                Logger.e(TAG, "add Location fail!", e);
             }
 
             mHandler.postDelayed(mUpdateLocation, 1000);

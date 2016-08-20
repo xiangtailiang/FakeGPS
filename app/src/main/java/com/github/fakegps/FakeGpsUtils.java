@@ -2,10 +2,11 @@ package com.github.fakegps;
 
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.github.fakegps.model.LocPoint;
+
+import tiger.radio.loggerlibrary.Logger;
 
 /**
  * Created by tiger on 7/23/16.
@@ -31,7 +32,7 @@ public final class FakeGpsUtils {
                 double lon = Double.parseDouble(split[1].trim());
                 point = new LocPoint(lat, lon);
             } catch (NumberFormatException e) {
-                Log.e(TAG, "Parse loc point error!", e);
+                Logger.e(TAG, "Parse loc point error!", e);
             }
         }
         return point;
@@ -43,7 +44,7 @@ public final class FakeGpsUtils {
         try {
             step = Double.valueOf(stepStr);
         } catch (NumberFormatException e) {
-            Log.e(TAG, "Parse move step error!", e);
+            Logger.e(TAG, "Parse move step error!", e);
         }
 
         return step;
@@ -55,7 +56,7 @@ public final class FakeGpsUtils {
         try {
             value = Integer.valueOf(stepStr);
         } catch (NumberFormatException e) {
-            Log.e(TAG, "Parse move step error!", e);
+            Logger.e(TAG, "Parse move step error!", e);
         }
 
         return value;
