@@ -100,7 +100,7 @@ public class JoyStickManager implements IJoyStickPresenter {
         } else {
             float factor = (float) mFlyTimeIndex / (float) mFlyTime;
             double lat = mCurrentLocPoint.getLatitude() + (factor * (mTargetLocPoint.getLatitude() - mCurrentLocPoint.getLatitude()));
-            double lon = mCurrentLocPoint.getLongitude() + (factor * (mTargetLocPoint.getLatitude() - mCurrentLocPoint.getLatitude()));
+            double lon = mCurrentLocPoint.getLongitude() + (factor * (mTargetLocPoint.getLongitude() - mCurrentLocPoint.getLongitude()));
             mCurrentLocPoint.setLatitude(lat);
             mCurrentLocPoint.setLongitude(lon);
             mFlyTimeIndex++;
